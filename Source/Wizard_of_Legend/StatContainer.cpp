@@ -43,5 +43,10 @@ void UStatContainer::AddModifier(FStatModifier Modifier)
 UStat* UStatContainer::GetStat(EStatsType StatType)
 {
 	UStat** FoundStat = Stats.Find(StatType);
-	return FoundStat ? *FoundStat : nullptr;
+	if (!FoundStat)
+	{
+		UE_LOG(LogTemp, Error, TEXT("No Ability found with ID %i"), StatType);
+		return nullptr;
+	}
+	return *FoundStat;
 }
