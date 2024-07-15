@@ -14,17 +14,26 @@ public:
 	UFireballArcana();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
-	float FireBallSpawnDistance;
+	FVector FireBallSpawnDistance;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
+	float FireBallSpeed;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
 	float CooldownTime;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
+	float ThirdProjectileDamageMulti;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
 	float ThirdProjectileDelay;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
 	float CycleResetTime;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
+	UDamageType* DamageType;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
 	TSubclassOf<AFireballArcanaProjectile> FireballClass;
 

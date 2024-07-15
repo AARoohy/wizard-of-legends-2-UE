@@ -1,6 +1,8 @@
 
 #include "FireballArcanaProjectile.h"
 
+#include "GameFramework/ProjectileMovementComponent.h"
+
 // Sets default values
 AFireballArcanaProjectile::AFireballArcanaProjectile()
 {
@@ -20,8 +22,11 @@ void AFireballArcanaProjectile::Tick(float DeltaTime)
 
 }
 
-void AFireballArcanaProjectile::FireInDirection(const FVector& ShootDirection)
+
+void AFireballArcanaProjectile::MoveInDirection(float deltaTime)
 {
-	//ProjectileMovementComponent->Velocity = ShootDirection * ProjectileMovementComponent->InitialSpeed;
+	FVector NewLocation = GetActorLocation() + (Direction * Speed * deltaTime);
+	SetActorLocation(NewLocation);
 }
+
 
