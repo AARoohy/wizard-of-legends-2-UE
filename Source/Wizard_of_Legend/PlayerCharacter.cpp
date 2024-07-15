@@ -6,7 +6,7 @@
 // Sets default values
 APlayerCharacter::APlayerCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 }
 
@@ -14,7 +14,7 @@ APlayerCharacter::APlayerCharacter()
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	UE_LOG(LogTemp, Warning, TEXT("is Dead aa"));
 }
 
 // Called every frame
@@ -29,3 +29,23 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
+FVector APlayerCharacter::DirectionBasedOnCamera(FVector InputDirection, UCameraComponent* CameraComponent)
+{
+	if (Controller == nullptr || (InputDirection.X == 0.0f && InputDirection.Y == 0.0f))
+	{
+		return FVector(0.0f, 0.0f,0.0f);
+	}
+
+	FVector Forward = CameraComponent->GetForwardVector();
+	FVector Right = CameraComponent->GetRightVector();
+
+	Forward.Z = 0;
+	Forward.Normalize();
+
+	Right.Normalize();
+
+	FVector MoveDirection = Forward * InputDirection.X + Right * InputDirection.Y;
+	MoveDirection.Normalize();
+
+	return MoveDirection;
+}
