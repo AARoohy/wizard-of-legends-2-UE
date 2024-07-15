@@ -1,6 +1,6 @@
 
-#include "BaseAbility.h"
 #include "AbilityDatabase.h"
+#include "BaseAbility.h"
 
 
 UBaseAbility* UAbilityDatabase::GetAbilityByID(int32 ID) const

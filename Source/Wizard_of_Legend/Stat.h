@@ -31,7 +31,9 @@ public:
 protected:
 	UStat(EStatsType InStatType);
 
+	UPROPERTY()
 	TArray<FStatModifier> Modifiers;
+	
 	EStatsType StatType;
 	float Value;
 

@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "BaseAbility.h"
+#include "FireballArcanaProjectile.h"
 #include "FireballArcana.generated.h"
 
 UCLASS(Blueprintable)
@@ -13,11 +14,8 @@ public:
 	UFireballArcana();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
-	float FirstSecondProjectileDamage;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
-	float ThirdProjectileDamage;
-
+	float FireBallSpawnDistance;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
 	float CooldownTime;
 
@@ -27,6 +25,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
 	float CycleResetTime;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
+	TSubclassOf<AFireballArcanaProjectile> FireballClass;
+
 	UFUNCTION(BlueprintCallable, Category = "Fireball")
 	virtual void ActivateAbility_Implementation(AActor* User) override;
 
@@ -34,7 +35,7 @@ private:
 	int32 ProjectileCount;
 	FTimerHandle ResetCycleTimerHandle;
 	FTimerHandle CooldownTimerHandle;
-	
+
 	bool bIsOnCooldown;
 
 	void ResetCycle();

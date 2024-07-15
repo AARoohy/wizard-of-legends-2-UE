@@ -10,4 +10,7 @@ UCLASS()
 class WIZARD_OF_LEGEND_API UAttackPowerStat : public UStat
 {
 	GENERATED_BODY()
+
+public:
+	UAttackPowerStat();
 };

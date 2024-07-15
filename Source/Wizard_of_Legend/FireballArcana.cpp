@@ -1,12 +1,12 @@
 #include "FireballArcana.h"
+
+#include "StatContainer.h"
 #include "GameFramework/Actor.h"
 #include "Engine/World.h"
 #include "TimerManager.h"
 
 UFireballArcana::UFireballArcana()
 {
-    FirstSecondProjectileDamage = 10.0f;
-    ThirdProjectileDamage = 30.0f;
     CooldownTime = 2.0f;
     ThirdProjectileDelay = 0.5f;
     CycleResetTime = 1.0f;
@@ -21,13 +21,31 @@ void UFireballArcana::ActivateAbility_Implementation(AActor* User)
         UE_LOG(LogTemp, Warning, TEXT("Ability is on cooldown!"));
         return;
     }
+    float attackPower=10;
 
-    // Clear the existing ResetCycle timer to avoid premature reset
+    UStatContainer* StatContainer = User->FindComponentByClass<UStatContainer>();
+    UStat* stat=StatContainer->GetStat(EStatsType::AttackPower);
+    if(IsValid(stat))
+        attackPower=stat->GetValue();
+    else
+        UE_LOG(LogTemp, Error, TEXT("No attackpower stat found"));
+
+
+    
     User->GetWorldTimerManager().ClearTimer(ResetCycleTimerHandle);
 
+    //Spawn FireBall
+    FVector ShootDirection = User->GetActorForwardVector();
+    FVector SpawnLocation = User->GetActorLocation() + User->GetActorForwardVector() * FireBallSpawnDistance;
+    FRotator SpawnRotation = User->GetActorRotation();
+    AFireballArcanaProjectile* Fireball = User->GetWorld()->SpawnActor<AFireballArcanaProjectile>(FireballClass, SpawnLocation, SpawnRotation);
+    
+    Fireball->FireInDirection(ShootDirection);
+    
     if (ProjectileCount == 2)// Handling fireball 3 
     {
-        UE_LOG(LogTemp, Log, TEXT("Casting third fireball with damage: %f"), ThirdProjectileDamage);
+        float superPower= attackPower*3;
+        UE_LOG(LogTemp, Log, TEXT("Casting third fireball with damage: %f"), superPower);
         ProjectileCount = 0;
         bIsOnCooldown = true;
 
@@ -35,7 +53,7 @@ void UFireballArcana::ActivateAbility_Implementation(AActor* User)
     }
     else
     {
-        UE_LOG(LogTemp, Log, TEXT("Casting normal fireball with damage: %f"), FirstSecondProjectileDamage);
+        UE_LOG(LogTemp, Log, TEXT("Casting normal fireball with damage: %f"), attackPower);
         ProjectileCount++;
 
         if(ProjectileCount<2)// fireball 1 and 2
