@@ -33,10 +33,7 @@ void UHealthStat::SetCurrentHealth(float amount)
 	float oldValue = currentHealth;
 	currentHealth = FMath::Clamp(amount, 0.0f, Value);
 	CheckDeath();
-	if (!isDead)
-	{
-		OnCurrentHealthChanged.Broadcast(oldValue, currentHealth);
-	}
+	OnCurrentHealthChanged.Broadcast(oldValue, currentHealth);
 }
 
 void UHealthStat::CheckDeath()
@@ -44,10 +41,10 @@ void UHealthStat::CheckDeath()
 	if (isDead)
 		return;
 
-
 	if (currentHealth > 0)
 		return;
 
+	UE_LOG(LogTemp, Error, TEXT("dead"));
 	isDead = true;
 	OnDied.Broadcast();
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "PlayerCharacter.h"
 #include "UObject/NoExportTypes.h"
 #include "BaseAbility.generated.h"
 
@@ -20,6 +21,6 @@ public:
 	int32 AbilityID;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Ability")
-	void ActivateAbility(AActor* User);
-	virtual void ActivateAbility_Implementation(AActor* User);
+	void ActivateAbility(APlayerCharacter* User);
+	virtual void ActivateAbility_Implementation(APlayerCharacter* User);
 };

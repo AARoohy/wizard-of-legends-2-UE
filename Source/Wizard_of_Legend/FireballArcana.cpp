@@ -15,7 +15,7 @@ UFireballArcana::UFireballArcana()
 	bIsOnCooldown = false;
 }
 
-void UFireballArcana::ActivateAbility_Implementation(AActor* User)
+void UFireballArcana::ActivateAbility_Implementation(APlayerCharacter* User)
 {
 	if (bIsOnCooldown)
 	{

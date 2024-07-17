@@ -38,7 +38,7 @@ public:
 	TSubclassOf<AFireballArcanaProjectile> FireballClass;
 
 	UFUNCTION(BlueprintCallable, Category = "Fireball")
-	virtual void ActivateAbility_Implementation(AActor* User) override;
+	virtual void ActivateAbility_Implementation(APlayerCharacter* User) override;
 
 private:
 	int32 ProjectileCount;

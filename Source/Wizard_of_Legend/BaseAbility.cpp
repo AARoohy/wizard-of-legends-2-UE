@@ -3,7 +3,7 @@
 
 #include "BaseAbility.h"
 
-void UBaseAbility::ActivateAbility_Implementation(AActor* User)
+void UBaseAbility::ActivateAbility_Implementation(APlayerCharacter* User)
 {
 	
 }
