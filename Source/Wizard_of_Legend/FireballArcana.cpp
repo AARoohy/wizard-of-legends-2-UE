@@ -5,20 +5,13 @@
 #include "Engine/World.h"
 #include "TimerManager.h"
 
-UFireballArcana::UFireballArcana()
+AFireballArcana::AFireballArcana()
 {
 	ProjectileCount = 0;
-	IsOnCooldown=false;
 }
-void UFireballArcana::Tick_Implementation(float deltaTime)
+void AFireballArcana::Tick_Implementation(float deltaTime)
 {
-	if(CurrentCooldown>0)
-	{
-		CurrentCooldown-=deltaTime;
-		if(CurrentCooldown<=0)
-			EndCooldown();
-		return;
-	}
+	Super::Tick_Implementation(deltaTime);
 	if(currentResetTimer>0)
 	{
 		currentResetTimer-=deltaTime;
@@ -28,15 +21,14 @@ void UFireballArcana::Tick_Implementation(float deltaTime)
 }
 
 
-void UFireballArcana::ActivateAbility_Implementation(APlayerCharacter* User)
+void AFireballArcana::OnActivateAbility_Implementation()
 {
-	if (IsOnCooldown)
+	if (GetIsOnCooldown())
 	{
 		return;
 	}
 	float attackPower = 10;
 
-	UStatContainer* StatContainer = User->FindComponentByClass<UStatContainer>();
 	UStat* stat = StatContainer->GetStat(EStatsType::AttackPower);
 	if (IsValid(stat))
 		attackPower = stat->GetValue();
@@ -44,18 +36,15 @@ void UFireballArcana::ActivateAbility_Implementation(APlayerCharacter* User)
 		UE_LOG(LogTemp, Error, TEXT("No attackpower stat found"));
 
 
-	User->GetWorldTimerManager().ClearTimer(ResetCycleTimerHandle);
+	CurrentUser->GetWorldTimerManager().ClearTimer(ResetCycleTimerHandle);
 
 	if (ProjectileCount == 2) // Handling fireball 3 
 	{
 		attackPower *= ThirdProjectileDamageMulti;
 		ProjectileCount = 0;
-		IsOnCooldown = true;
-
 		
 		currentResetTimer=0;
-		CurrentCooldown=CooldownTime;
-		OnCooldownStart.Broadcast(CooldownTime);
+		StartCooldown();
 	}
 	else
 	{
@@ -67,26 +56,24 @@ void UFireballArcana::ActivateAbility_Implementation(APlayerCharacter* User)
 	}
 
 	//Spawn FireBall
-	FVector ShootDirection = User->GetActorForwardVector();
-	FVector SpawnLocation = User->GetActorLocation() + User->GetActorForwardVector() * FireBallSpawnDistance;
-	FRotator SpawnRotation = User->GetActorRotation();
-	AFireballArcanaProjectile* Fireball = User->GetWorld()->SpawnActor<AFireballArcanaProjectile>(
+	FVector ShootDirection = CurrentUser->GetActorForwardVector();
+	FVector SpawnLocation = CurrentUser->GetActorLocation() + CurrentUser->GetActorForwardVector() * FireBallSpawnDistance;
+	FRotator SpawnRotation = CurrentUser->GetActorRotation();
+	AFireballArcanaProjectile* Fireball = CurrentUser->GetWorld()->SpawnActor<AFireballArcanaProjectile>(
 		FireballClass, SpawnLocation, SpawnRotation);
 	Fireball->Speed = FireBallSpeed;
-	Fireball->Shooter = User;
+	Fireball->Shooter = CurrentUser;
 	Fireball->Damage = attackPower;
 	Fireball->Direction = ShootDirection;
 }
 
-void UFireballArcana::ResetCycle()
+void AFireballArcana::ResetCycle()
 {
 	//UE_LOG(LogTemp, Log, TEXT("Resetting fireball casting cycle."));
 	ProjectileCount = 0;
 }
 
-void UFireballArcana::EndCooldown()
+void AFireballArcana::EndCooldown()
 {
-	IsOnCooldown = false;
-	
 	OnAbilityReady.Broadcast();
 }

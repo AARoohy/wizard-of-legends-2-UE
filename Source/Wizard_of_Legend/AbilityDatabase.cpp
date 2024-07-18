@@ -3,25 +3,26 @@
 #include "BaseAbility.h"
 
 
-UBaseAbility* UAbilityDatabase::GetAbilityByID(int32 ID) const
+ABaseAbility* UAbilityDatabase::GetAbilityByID(int32 ID) const
 {
-	for (UBaseAbility* Ability : Abilities)
+	for (TSubclassOf<ABaseAbility> Ability : Abilities)
 	{
-		if (Ability && Ability->AbilityID == ID)
+		ABaseAbility* a=Ability.GetDefaultObject();
+		if (Ability && a->AbilityID == ID)
 		{
-			return Ability;
+			return a;
 		}
 	}
 	UE_LOG(LogTemp,Error,TEXT("No Ability found with ID %i"),ID);
 	return nullptr;
 }
 
-UBaseAbility* UAbilityDatabase::GetAbilityInstanceByID(int32 ID, UObject* Outer) const
+ABaseAbility* UAbilityDatabase::GetAbilityInstanceByID(int32 ID, UObject* Outer) const
 {
-	UBaseAbility* Ability = GetAbilityByID(ID);
+	ABaseAbility* Ability = GetAbilityByID(ID);
 	if (Ability)
 	{
-		return DuplicateObject<UBaseAbility>(Ability, Outer);
+		return DuplicateObject<ABaseAbility>(Ability, Outer);
 	}
 	return nullptr;
 }

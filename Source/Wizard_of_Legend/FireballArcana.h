@@ -6,12 +6,12 @@
 #include "FireballArcana.generated.h"
 
 UCLASS(Blueprintable)
-class WIZARD_OF_LEGEND_API UFireballArcana : public UBaseAbility
+class WIZARD_OF_LEGEND_API AFireballArcana : public ABaseAbility
 {
 	GENERATED_BODY()
 
 public:
-	UFireballArcana();
+	AFireballArcana();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
 	FVector FireBallSpawnDistance;
@@ -41,10 +41,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Fireball")
 	float currentResetTimer;
 
-	UFUNCTION(BlueprintCallable, Category = "Fireball")
-	virtual void ActivateAbility_Implementation(APlayerCharacter* User) override;
+	virtual void OnActivateAbility_Implementation() override;
 
-	UFUNCTION(BlueprintCallable, Category = "Fireball")
 	virtual void Tick_Implementation(float deltaTime) override;
 
 

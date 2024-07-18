@@ -15,6 +15,9 @@ class WIZARD_OF_LEGEND_API APlayerCharacter : public ACharacter
 public:
 	APlayerCharacter();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability")
+	bool CanMove;
+
 protected:
 	virtual void BeginPlay() override;
 

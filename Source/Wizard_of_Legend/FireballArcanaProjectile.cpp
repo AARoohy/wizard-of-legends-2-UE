@@ -1,4 +1,3 @@
-
 #include "FireballArcanaProjectile.h"
 
 #include "GameFramework/ProjectileMovementComponent.h"
@@ -7,19 +6,17 @@
 AFireballArcanaProjectile::AFireballArcanaProjectile()
 {
 	PrimaryActorTick.bCanEverTick = true;
-
 }
 
 void AFireballArcanaProjectile::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 void AFireballArcanaProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	MoveInDirection(DeltaTime);
 }
 
 
@@ -30,3 +27,10 @@ void AFireballArcanaProjectile::MoveInDirection(float deltaTime)
 }
 
 
+void AFireballArcanaProjectile::Shoot(AActor* _shooter, float _speed, FVector _direction, float _damage)
+{
+	Shooter=_shooter;
+	Speed=_speed;
+	Direction=_direction;
+	Damage=_damage;
+}

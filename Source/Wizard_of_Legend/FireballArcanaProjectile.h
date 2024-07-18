@@ -34,4 +34,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Projectile")
 	void MoveInDirection(float deltaTime);
 
+	UFUNCTION(BlueprintCallable, Category="Projectile")
+	void Shoot(AActor* _shooter, float _speed, FVector _direction, float _damage);
 };

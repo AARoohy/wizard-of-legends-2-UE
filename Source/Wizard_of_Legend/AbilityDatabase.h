@@ -13,11 +13,11 @@ class WIZARD_OF_LEGEND_API UAbilityDatabase : public UDataAsset
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Abilities")
-	TArray<UBaseAbility*> Abilities;
+	TArray<TSubclassOf<ABaseAbility>> Abilities;
 
 	UFUNCTION(BlueprintCallable, Category = "Ability")
-	UBaseAbility* GetAbilityByID(int32 ID) const;
+	ABaseAbility* GetAbilityByID(int32 ID) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Ability")
-	UBaseAbility* GetAbilityInstanceByID(int32 ID, UObject* Outer) const;
+	ABaseAbility* GetAbilityInstanceByID(int32 ID, UObject* Outer) const;
 };
