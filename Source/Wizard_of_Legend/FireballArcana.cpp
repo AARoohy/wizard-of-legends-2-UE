@@ -4,22 +4,34 @@
 #include "GameFramework/Actor.h"
 #include "Engine/World.h"
 #include "TimerManager.h"
-#include "GameFramework/ProjectileMovementComponent.h"
 
 UFireballArcana::UFireballArcana()
 {
-	CooldownTime = 2.0f;
-	ThirdProjectileDelay = 0.5f;
-	CycleResetTime = 1.0f;
 	ProjectileCount = 0;
-	bIsOnCooldown = false;
+	IsOnCooldown=false;
 }
+void UFireballArcana::Tick_Implementation(float deltaTime)
+{
+	if(CurrentCooldown>0)
+	{
+		CurrentCooldown-=deltaTime;
+		if(CurrentCooldown<=0)
+			EndCooldown();
+		return;
+	}
+	if(currentResetTimer>0)
+	{
+		currentResetTimer-=deltaTime;
+		if(currentResetTimer<=0)
+			ResetCycle();
+	}
+}
+
 
 void UFireballArcana::ActivateAbility_Implementation(APlayerCharacter* User)
 {
-	if (bIsOnCooldown)
+	if (IsOnCooldown)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Ability is on cooldown!"));
 		return;
 	}
 	float attackPower = 10;
@@ -38,24 +50,20 @@ void UFireballArcana::ActivateAbility_Implementation(APlayerCharacter* User)
 	{
 		attackPower *= ThirdProjectileDamageMulti;
 		ProjectileCount = 0;
-		bIsOnCooldown = true;
+		IsOnCooldown = true;
 
-		User->GetWorldTimerManager().SetTimer(CooldownTimerHandle, this, &UFireballArcana::EndCooldown, CooldownTime,
-		                                      false);
+		
+		currentResetTimer=0;
+		CurrentCooldown=CooldownTime;
+		OnCooldownStart.Broadcast(CooldownTime);
 	}
 	else
 	{
 		ProjectileCount++;
 		if (ProjectileCount < 2) // fireball 1 and 2
-		{
-			User->GetWorldTimerManager().SetTimer(ResetCycleTimerHandle, this, &UFireballArcana::ResetCycle,
-			                                      CycleResetTime, false);
-		}
+			currentResetTimer=CycleResetTime;
 		else // fireball 3 preparation 
-		{
-			User->GetWorldTimerManager().SetTimer(ResetCycleTimerHandle, this, &UFireballArcana::ResetCycle,
-			                                      ThirdProjectileDelay, false);
-		}
+			currentResetTimer=ThirdProjectileDelay;
 	}
 
 	//Spawn FireBall
@@ -72,12 +80,13 @@ void UFireballArcana::ActivateAbility_Implementation(APlayerCharacter* User)
 
 void UFireballArcana::ResetCycle()
 {
-	UE_LOG(LogTemp, Log, TEXT("Resetting fireball casting cycle."));
+	//UE_LOG(LogTemp, Log, TEXT("Resetting fireball casting cycle."));
 	ProjectileCount = 0;
 }
 
 void UFireballArcana::EndCooldown()
 {
-	UE_LOG(LogTemp, Log, TEXT("Cooldown ended. Ability can be used again."));
-	bIsOnCooldown = false;
+	IsOnCooldown = false;
+	
+	OnAbilityReady.Broadcast();
 }

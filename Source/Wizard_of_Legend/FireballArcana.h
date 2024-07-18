@@ -19,8 +19,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
 	float FireBallSpeed;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
-	float CooldownTime;
+	
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
 	float ThirdProjectileDamageMulti;
@@ -37,15 +36,23 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
 	TSubclassOf<AFireballArcanaProjectile> FireballClass;
 
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Fireball")
+	float currentResetTimer;
+
 	UFUNCTION(BlueprintCallable, Category = "Fireball")
 	virtual void ActivateAbility_Implementation(APlayerCharacter* User) override;
+
+	UFUNCTION(BlueprintCallable, Category = "Fireball")
+	virtual void Tick_Implementation(float deltaTime) override;
+
 
 private:
 	int32 ProjectileCount;
 	FTimerHandle ResetCycleTimerHandle;
 	FTimerHandle CooldownTimerHandle;
 
-	bool bIsOnCooldown;
 
 	void ResetCycle();
 	void EndCooldown();
