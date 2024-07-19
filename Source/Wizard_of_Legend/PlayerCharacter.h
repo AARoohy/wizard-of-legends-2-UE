@@ -28,4 +28,14 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Player Character")
 	FVector DirectionBasedOnCamera(FVector InputDirection, UCameraComponent* CameraComponent);
+
+
+	UFUNCTION(BlueprintCallable, Category = "Player Character")
+	void RotatePlayerToMouseCursor();
+	UFUNCTION(BlueprintCallable, Category = "Player Character")
+	FRotator GetPlayerRotatorToMouseCursor();
+
+private:
+	APlayerController* PlayerController;
+
 };
