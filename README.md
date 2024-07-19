@@ -26,7 +26,6 @@ Wizard of Legends 2 is a fast-paced, action-packed top-down game where players t
 - **Ability System:** The ability system in Wizard of Legends 2 is designed to be flexible and efficient, allowing for the rapid creation of new abilities and real-time adjustments. The ability system incorporates several design patterns to ensure flexibility and scalability:
    - **Factory Method Pattern**
    - **Observer Pattern**
-   - **Template Method Pattern**
    - **State Pattern**
   
 - **Controller/Keyboard Support:** Wizard of Legends 2 provides full support for both controllers and keyboards, ensuring a versatile and accessible gameplay experience.
