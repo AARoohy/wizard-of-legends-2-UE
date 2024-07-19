@@ -77,12 +77,12 @@ To get a local copy up and running, follow these simple steps:
 ## Usage
 Once the project is set up, you can run the game directly from Unreal Engine by clicking the "Play" button. You can also package the project to create a standalone executable for easier distribution and testing.
 
-| Actions     | PC | Controller                                             |
-|-------------|----|--------------------------------------------------------|
-| Move        | 35 | <img src="https://example.com/charlie.png" width="50"> |
-| Skill 1     | 30 | <img src="https://example.com/alice.png" width="50">   |
-| Dash        | 25 | <img src="https://example.com/bob.png" width="50">     |
-| Self Damage | 35 | <img src="https://example.com/charlie.png" width="50"> |
+| Actions                    | PC                                                                                                                                | Controller                                                                                                                               |
+|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| Move                       | <img src="https://raw.githubusercontent.com/AARoohy/wizard-of-legends-2-UE/main/AbilityActionImage/Move_PC.png" width="50">       | <img src="https://raw.githubusercontent.com/AARoohy/wizard-of-legends-2-UE/main/AbilityActionImage/Move_Controller.png" width="50">      |
+| Skill 1                    | <img src="https://raw.githubusercontent.com/AARoohy/wizard-of-legends-2-UE/main/AbilityActionImage/BaseSkill_PC.png" width="50">  | <img src="https://raw.githubusercontent.com/AARoohy/wizard-of-legends-2-UE/main/AbilityActionImage/BaseSkill_Controller.png" width="50"> |
+| Dash                       | <img src="https://raw.githubusercontent.com/AARoohy/wizard-of-legends-2-UE/main/AbilityActionImage/Dash_PC.png" width="50">       | <img src="https://raw.githubusercontent.com/AARoohy/wizard-of-legends-2-UE/main/AbilityActionImage/Dash_Controller.png" width="50">      |
+| Self Damage (Test Purpose) | <img src="https://raw.githubusercontent.com/AARoohy/wizard-of-legends-2-UE/main/AbilityActionImage/SlefDamage_PC.png" width="50"> |                                                                                                                                          |
 ## Contact
 [AmirAbbasRoohy@gmail.com](mailto:amirabbasroohy@gmail.com)
 
