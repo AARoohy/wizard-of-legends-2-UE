@@ -1,6 +1,6 @@
 # Wizard of Legends 2: Top-Down Unreal Game
 
-Welcome to the Wizard of Legends 2 repository! This project is part of my assignment for Deadmage Studio. It is a top-down game developed using Unreal Engine, inspired by the original Wizard of Legends.
+Welcome to the Wizard of Legends 2 repository! This project is an assignment for Deadmage Studio. It is a top-down game developed using Unreal Engine, inspired by the original Wizard of Legends.
 
 ## Table of Contents
 
@@ -12,7 +12,7 @@ Welcome to the Wizard of Legends 2 repository! This project is part of my assign
 
 ## Introduction
 
-Wizard of Legends 2 is a fast-paced, action-packed top-down game where players take on the role of a powerful wizard. The game focuses on quick reflexes, strategic spellcasting, and overcoming various enemies and challenges. This project is designed to showcase my skills in Unreal Engine and game development.
+Wizard of Legends 2 is a fast-paced, action-packed top-down game where players take on the role of a powerful wizard. The game focuses on quick reflexes, strategic spellcasting, and overcoming various enemies and challenges. This project is an assignment for Deadmage Studio and is designed to showcase my skills in Unreal Engine and game development.
 
 ## Features
 
