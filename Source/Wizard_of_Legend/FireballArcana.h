@@ -2,7 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "BaseAbility.h"
-#include "FireballArcanaProjectile.h"
+#include "Projectile.h"
 #include "FireballArcana.generated.h"
 
 UCLASS(Blueprintable)
@@ -34,7 +34,7 @@ public:
 	UDamageType* DamageType;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fireball")
-	TSubclassOf<AFireballArcanaProjectile> FireballClass;
+	TSubclassOf<AProjectile> FireballClass;
 
 
 

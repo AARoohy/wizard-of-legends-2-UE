@@ -11,7 +11,6 @@ float UHealthStat::RecalculateValue()
 	float HealthPercentage = (Value == 0 && currentHealth == 0) ? 1.0f : currentHealth / Value;
 
 	float NewValue = Super::RecalculateValue();
-	UE_LOG(LogTemp, Warning, TEXT("percentage %f oldvalue %f newValue %f new currentHealth %f"),HealthPercentage,NewValue,Value,(Value * HealthPercentage));
 	SetValue(NewValue);
 	SetCurrentHealth(Value * HealthPercentage);
 
@@ -44,7 +43,6 @@ void UHealthStat::CheckDeath()
 	if (currentHealth > 0)
 		return;
 
-	UE_LOG(LogTemp, Error, TEXT("dead"));
 	isDead = true;
 	OnDied.Broadcast();
 }

@@ -82,4 +82,5 @@ protected:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Ability")
 	void OnSetup(APlayerCharacter* user);
 	virtual void OnSetup_Implementation(APlayerCharacter* user);
+
 };

@@ -59,7 +59,7 @@ void AFireballArcana::OnActivateAbility_Implementation()
 	FVector ShootDirection = CurrentUser->GetActorForwardVector();
 	FVector SpawnLocation = CurrentUser->GetActorLocation() + CurrentUser->GetActorForwardVector() * FireBallSpawnDistance;
 	FRotator SpawnRotation = CurrentUser->GetActorRotation();
-	AFireballArcanaProjectile* Fireball = CurrentUser->GetWorld()->SpawnActor<AFireballArcanaProjectile>(
+	AProjectile* Fireball = CurrentUser->GetWorld()->SpawnActor<AProjectile>(
 		FireballClass, SpawnLocation, SpawnRotation);
 	Fireball->Speed = FireBallSpeed;
 	Fireball->Shooter = CurrentUser;
